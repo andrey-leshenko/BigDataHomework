@@ -8,9 +8,25 @@ import java.io.PrintStream;
 public class MoviesReviewsQueryRunner {
 
     public static void main(String[] args) {
+        String inputFileName = null;
+        String outputFileName = null;
 
-        //TODO: Here you need to add the part of reading input parameters
-        // opening stream for writing the output and validating.
+        for (String s : args) {
+            final String[] parts = s.split("=", 2);
+            if (parts.length == 2) {
+                final String value = parts[1];
+
+                    inputFileName = value;
+                    outputFileName = value;
+            }
+        }
+
+        if (inputFileName == null || outputFileName == null) {
+            System.out.println("Usage: -inputFile=file1 -outputFile=file2\n");
+            return;
+        }
+
+        //TODO: opening stream for writing the output and validating.
 
         final PrintStream printer = null;
         try{
