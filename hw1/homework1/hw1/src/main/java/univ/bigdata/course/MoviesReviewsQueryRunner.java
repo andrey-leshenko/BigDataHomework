@@ -14,9 +14,12 @@ public class MoviesReviewsQueryRunner {
         for (String s : args) {
             final String[] parts = s.split("=", 2);
             if (parts.length == 2) {
+                final String argName = parts[0];
                 final String value = parts[1];
 
+                if (argName.equals("-inputFile"))
                     inputFileName = value;
+                else if (argName.equals("-outputFile"))
                     outputFileName = value;
             }
         }
