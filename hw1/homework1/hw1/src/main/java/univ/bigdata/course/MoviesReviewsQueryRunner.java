@@ -3,6 +3,7 @@ package univ.bigdata.course;
 import univ.bigdata.course.providers.FileIOMoviesProvider;
 import univ.bigdata.course.providers.MoviesProvider;
 
+import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
 public class MoviesReviewsQueryRunner {
@@ -31,7 +32,15 @@ public class MoviesReviewsQueryRunner {
 
         //TODO: opening stream for writing the output and validating.
 
-        final PrintStream printer = null;
+        PrintStream printer;
+
+        try {
+            printer = new PrintStream(outputFileName);
+        }
+        catch (FileNotFoundException ex) {
+            return;
+        }
+
         try{
             final MoviesProvider provider = new FileIOMoviesProvider();
             final IMoviesStorage storage = new MoviesStorage(provider);
