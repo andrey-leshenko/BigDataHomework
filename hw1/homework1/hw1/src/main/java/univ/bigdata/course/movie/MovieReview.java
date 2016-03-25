@@ -1,102 +1,77 @@
 package univ.bigdata.course.movie;
 
-import java.util.Date;
+import java.time.Instant;
 
+/**
+ * Represents an immutable movie review.
+ */
 public class MovieReview {
 
-    private Movie movie;
+    private final String    productId;
+    private final String    userId;
+    private final String    profileName;
+    private final int       votesHelpful;
+    private final int       votesTotal;
+    private final double    score;
+    private final Instant   time;
+    private final String    summary;
+    private final String    text;
 
-    private String userId;
-
-    private String profileName;
-
-    private String helpfulness;
-
-    private Date timestamp;
-
-    private String summary;
-
-    private String review;
-
-    public MovieReview() {
+    /**
+     * Constructs a new movie review.
+     *
+     * @param productId     ID of the product
+     * @param userId        ID of the user who left the review
+     * @param profileName   Profile name of the user who left the review
+     * @param votesHelpful  Number of users who rated this review as helpful
+     * @param votesTotal    Number of users who rated this review
+     * @param score         The rating score given in this review
+     * @param time          The time at which this review was submitted
+     * @param summary       Short summary of the review
+     * @param text          Full review text
+     */
+    public MovieReview(
+            String  productId,
+            String  userId,
+            String  profileName,
+            int     votesHelpful,
+            int     votesTotal,
+            double  score,
+            Instant time,
+            String  summary,
+            String  text
+    ) {
+        this.productId      = productId;
+        this .userId        = userId;
+        this.profileName    = profileName;
+        this.votesHelpful   = votesHelpful;
+        this.votesTotal     = votesTotal;
+        this.score          = score;
+        this.time           = time;
+        this.summary        = summary;
+        this.text           = text;
     }
 
-    public MovieReview(Movie movie, String userId, String profileName, String helpfulness, Date timestamp, String summary, String review) {
-        this.movie = movie;
-        this.userId = userId;
-        this.profileName = profileName;
-        this.helpfulness = helpfulness;
-        this.timestamp = timestamp;
-        this.summary = summary;
-        this.review = review;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getProfileName() {
-        return profileName;
-    }
-
-    public void setProfileName(String profileName) {
-        this.profileName = profileName;
-    }
-
-    public String getHelpfulness() {
-        return helpfulness;
-    }
-
-    public void setHelpfulness(String helpfulness) {
-        this.helpfulness = helpfulness;
-    }
-
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public String getReview() {
-        return review;
-    }
-
-    public void setReview(String review) {
-        this.review = review;
-    }
-
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
+    public String   getProductId    () { return productId;      }
+    public String   getUserId       () { return userId;         }
+    public String   getProfileName  () { return profileName;    }
+    public int      getVotesHelpful () { return votesHelpful;   }
+    public int      getVotesTotal   () { return votesTotal;     }
+    public Instant  getTime         () { return time;           }
+    public String   getSummary      () { return summary;        }
+    public String   getText         () { return text;           }
 
     @Override
     public String toString() {
         return "MovieReview{" +
-                "movie=" + movie +
-                ", userId='" + userId + '\'' +
-                ", profileName='" + profileName + '\'' +
-                ", helpfulness='" + helpfulness + '\'' +
-                ", timestamp=" + timestamp +
-                ", summary='" + summary + '\'' +
-                ", review='" + review + '\'' +
+                "productId="        + productId +
+                ", userId='"        + userId + '\'' +
+                ", profileName='"   + profileName + '\'' +
+                ", helpfulness='"   + votesHelpful + '/' + votesTotal + '\'' +
+                ", score='"         + score + '\'' +
+                ", timestamp="      + time +
+                ", summary='"       + summary + '\'' +
+                ", review='"        + text + '\'' +
                 '}';
     }
 }

@@ -1,10 +1,12 @@
 package univ.bigdata.course;
 
-import univ.bigdata.course.providers.FileIOMoviesProvider;
-import univ.bigdata.course.providers.MoviesProvider;
+import univ.bigdata.course.movie.MovieReview;
+import univ.bigdata.course.providers.MovieReviewFileIterator;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.util.Iterator;
 
 public class MoviesReviewsQueryRunner {
 
@@ -30,20 +32,27 @@ public class MoviesReviewsQueryRunner {
             return;
         }
 
-        //TODO: opening stream for writing the output and validating.
-
         PrintStream printer;
 
         try {
             printer = new PrintStream(outputFileName);
         }
-        catch (FileNotFoundException ex) {
+        catch (FileNotFoundException e) {
+            System.err.println("Error: Could not write to output file: " + outputFileName + ". " + e);
+            return;
+        }
+
+        Iterator<MovieReview> reviewIterator;
+
+        try {
+            reviewIterator = new MovieReviewFileIterator(new File(inputFileName));
+        } catch (FileNotFoundException e) {
+            System.err.println("Error: Input file not found: " + inputFileName + ". " + e);
             return;
         }
 
         try{
-            final MoviesProvider provider = new FileIOMoviesProvider();
-            final IMoviesStorage storage = new MoviesStorage(provider);
+            final IMoviesStorage storage = new MoviesStorage(reviewIterator);
 
             printer.println("Getting list of total movies average.");
             // 1.

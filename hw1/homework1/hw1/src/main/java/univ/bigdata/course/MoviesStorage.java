@@ -1,10 +1,9 @@
 package univ.bigdata.course;
 
 import univ.bigdata.course.movie.Movie;
-import univ.bigdata.course.providers.MoviesProvider;
+import univ.bigdata.course.movie.MovieReview;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Main class which capable to keep all information regarding movies review.
@@ -20,10 +19,19 @@ import java.util.Map;
  * 7. K most helpful users
  */
 public class MoviesStorage implements IMoviesStorage {
+    private final List<MovieReview> reviews;
 
-    public MoviesStorage(final MoviesProvider provider) {
-        //TODO: read movies using provider interface
-        throw new UnsupportedOperationException("You have to implement this method on your own.");
+    public MoviesStorage(Iterator<MovieReview> reviewIterator) {
+        List<MovieReview> reviewList = new ArrayList<>();
+        // NOTE (Andrey): We assume all the reviews will fit in memory
+        while (reviewIterator.hasNext())
+            reviewList.add(reviewIterator.next());
+
+        this.reviews = reviewList;
+
+        // NOTE (Andrey): This is here temporarily for debugging purposes
+        System.out.println("Got the following reviews:");
+        reviews.forEach(System.out::println);
     }
 
     @Override

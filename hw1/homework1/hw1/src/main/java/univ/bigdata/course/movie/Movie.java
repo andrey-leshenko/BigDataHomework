@@ -3,11 +3,9 @@ package univ.bigdata.course.movie;
 public class Movie {
 
     private String productId;
-
     private double score;
 
-    public Movie() {
-    }
+    public Movie() { }
 
     public Movie(String productId, double score) {
         this.productId = productId;
@@ -37,5 +35,4 @@ public class Movie {
                 ", score=" + score +
                 '}';
     }
-
 }
