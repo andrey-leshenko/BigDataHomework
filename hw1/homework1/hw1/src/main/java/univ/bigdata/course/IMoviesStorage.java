@@ -43,9 +43,9 @@ public interface IMoviesStorage {
     Movie movieWithHighestAverage();
 
     /**
-     * Returns a list of movies in the best <code>percent</code> percent of the movies (by average score).
+     * Returns a list of movies better than <code>percent</code> percent of all movies (by average score).
      *
-     * For example for 2% return the best 2% of movies.
+     * For example for 90% return the best 10% of movies.
      * List should be sorted according the average score of movie and in case there
      * are more than one movie with same average score, sort by product id
      * lexicographically in natural order.
