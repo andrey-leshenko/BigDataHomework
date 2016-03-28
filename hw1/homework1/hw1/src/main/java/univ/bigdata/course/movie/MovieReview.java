@@ -57,6 +57,7 @@ public class MovieReview {
     public String   getProfileName  () { return profileName;    }
     public int      getVotesHelpful () { return votesHelpful;   }
     public int      getVotesTotal   () { return votesTotal;     }
+    public double   getScore        () { return score;          }
     public Instant  getTime         () { return time;           }
     public String   getSummary      () { return summary;        }
     public String   getText         () { return text;           }
