@@ -1,5 +1,6 @@
 package univ.bigdata.course;
 
+import javafx.util.Pair;
 import univ.bigdata.course.movie.Movie;
 import univ.bigdata.course.movie.MovieReview;
 
@@ -34,14 +35,39 @@ public class MoviesStorage implements IMoviesStorage {
         reviews.forEach(System.out::println);
     }
 
+    private HashMap<String, List<MovieReview> > getReviewsHashMap(){
+        HashMap<String,List<MovieReview> > reviewsMap = new HashMap<>();
+        for (MovieReview review : reviews){
+            reviewsMap.get(review.getProductId()).add(review);
+        }
+        return reviewsMap;
+    }
+
     @Override
     public double totalMoviesAverageScore() {
-        throw new UnsupportedOperationException("You have to implement this method on your own.");
+        HashMap<String, List<MovieReview> > reviewsMap = getReviewsHashMap();
+        double totalSum = 0;
+        for(String key : reviewsMap.keySet()){
+            double movieSum = 0;
+            for(MovieReview review : reviewsMap.get(key)){
+                movieSum += review.getScore();
+            }
+            totalSum += movieSum/reviewsMap.get(key).size();
+        }
+        return totalSum/reviewsMap.size();
     }
 
     @Override
     public double totalMovieAverage(String productId) {
-        throw new UnsupportedOperationException("You have to implement this method on your own.");
+        double total = 0;
+        int counter = 0;
+        for (MovieReview review: reviews) {
+            if(review.getProductId().equals(productId)){
+                counter++;
+                total += review.getScore();
+            }
+        }
+        return total/counter;
     }
 
     @Override
@@ -61,7 +87,16 @@ public class MoviesStorage implements IMoviesStorage {
 
     @Override
     public String mostReviewedProduct() {
-        throw new UnsupportedOperationException("You have to implement this method on your own.");
+        HashMap<String,List<MovieReview> > reviewsMap = getReviewsHashMap();
+        String bestProduct = new String();
+        int maxReviews = 0;
+        for(String key : reviewsMap.keySet()){
+            if(reviewsMap.get(key).size() > maxReviews){
+                maxReviews = reviewsMap.get(key).size();
+                bestProduct = key;
+            }
+        }
+        return bestProduct;
     }
 
     @Override
